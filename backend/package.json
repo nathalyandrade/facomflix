@@ -1,0 +1,17 @@
+{
+  "name": "facom-flix-service",
+  "version": "1.0.0",
+  "description": "backend FacomFlix",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Davidson D. Ferreira, Nathaly de Andrade",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.3.3",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5"
+  }
+}
