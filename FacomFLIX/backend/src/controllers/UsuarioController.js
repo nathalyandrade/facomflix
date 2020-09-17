@@ -1,11 +1,9 @@
-const sequelize = require('sequelize');
-const TipoUsuario = require("../models/TipoUsuario")
-
+const { models } = require('../../configBD');
 
 module.exports = {
     async mostrarTipoUsuario(req, res) {
         try {
-            const tipoUsuario = await TipoUsuario.TipoUsuario.findAll();
+            const tipoUsuario = await models.TipoUsuario.findAll();
 
             if (tipoUsuario != null) {
                 console.log('entrei aqui?', tipoUsuario);
