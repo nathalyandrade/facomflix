@@ -8,6 +8,7 @@ module.exports = {
             const tipoUsuario = await TipoUsuario.TipoUsuario.findAll();
 
             if (tipoUsuario != null) {
+                console.log('entrei aqui?', tipoUsuario);
                 return res.json(tipoUsuario);
             }
 
