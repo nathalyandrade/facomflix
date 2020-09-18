@@ -23,7 +23,8 @@ var sequelize = new Sequelize('drj55vn7c0l36', 'fcaqeicsrqrwzg', 'bd8eb106388752
   });
 
   const modelDefiners = [
-	require('./src/models/TipoUsuario'),
+    require('./src/models/TipoUsuario'),
+    require('./src/models/Usuario')
 	// Add more models here...
 	// require('./models/item'),
 ];

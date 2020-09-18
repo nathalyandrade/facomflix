@@ -5,7 +5,7 @@ const UsuarioController = require("./controllers/UsuarioController");
 
 
 
-routes.get("/usuario", UsuarioController.mostrarTipoUsuario);
-
+routes.get("/usuario", UsuarioController.mostrarTipoUsuario); // mostrar tipo usuarios disponiveis
+routes.post("/usuario", UsuarioController.cadastrarUsuario); // cadastrar usuario
 
 module.exports = routes;
