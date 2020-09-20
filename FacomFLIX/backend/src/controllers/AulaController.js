@@ -4,8 +4,22 @@ const jwt = require("jsonwebtoken");
 
 const AulaController = {};
 
-AulaController.mostrarAulas = function (req, res){
-    return res.send("Entrei em mostrarAulas");
+AulaController.mostrarAulas = async function (req, res){
+    try {
+        const Aula = await models.Aula.findAll();
+
+        if (Aula) {
+            return res.json(Aula);
+        }
+
+        throw new Error("Erro");
+
+    } catch (e) {
+        console.log(e.message);
+        return res
+            .status(500)
+            .json({ success: false, message: "Erro ao encontrar aula" });
+    }
 }
 
 AulaController.cadastrarAula = function (req, res){
