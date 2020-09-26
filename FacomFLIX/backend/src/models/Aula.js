@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
             field: 'fk_serie',
             allowNull: false,
             references:{
-                model: 'Serie',
+                model: 'SerieAula',
                 key: 'id'
             }
         },
@@ -52,4 +52,9 @@ module.exports = (sequelize) => {
     }, {
         tableName: 'aula' // forcar o nome da tabela no banco
     });
+
+    // sequelize.models.Aula.hasOne(sequelize.models.Usuario, {foreignKey: 'id', sourceKey: 'usuarioUpload'}); -- n precisamos no momento
+    sequelize.models.Aula.hasOne(sequelize.models.Categoria, {foreignKey: 'id', sourceKey: 'categoria', as:'detalhesCategoria'});
+    sequelize.models.Aula.hasOne(sequelize.models.SerieAula, {foreignKey: 'id', sourceKey: 'serie', as:'detalhesSerie'});
+    //sequelize.models.Categoria.belongsTo(sequelize.models.Aula); -- se categoria tivesse uma key de Usuario, teria que adicionar isso aqui
 };

@@ -36,7 +36,8 @@ routes.get("/aula", AulaController.mostrarAulas);
 routes.post("/aula", AulaController.cadastrarAula);
 routes.delete("/aula", AulaController.apagarAula);
 routes.put("/aula", AulaController.editarAula);
-
+routes.get("/aula/buscarPorNome/:nomeAula", autenticarUsuario, AulaController.buscarAulasPorNome);
+routes.get("/aula/buscarPorNomeCategoria/:nomeCategoria", autenticarUsuario, AulaController.buscarAulasPorCategoria);
 
 
 module.exports = routes;
