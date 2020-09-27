@@ -68,7 +68,7 @@ module.exports = {
                 aula = await models.Aula.update(aula, {where: {id: aula.id}});
                 return res
                     .status(201)
-                    .json({ success: true, message: "Aula atualizada!").end();
+                    .json({ success: true, message: "Aula atualizada!"}).end();
             }
             throw new Error("Erro");
 
