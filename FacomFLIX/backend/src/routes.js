@@ -34,7 +34,7 @@ routes.post("/usuario/testarLogin", autenticarUsuario, UsuarioController.testarL
 
 routes.get("/aula", AulaController.mostrarAulas);
 routes.post("/aula", AulaController.cadastrarAula);
-routes.delete("/aula", AulaController.apagarAula);
+routes.delete("/aula/:id", AulaController.apagarAula);
 routes.put("/aula", AulaController.editarAula);
 routes.get("/aula/buscarPorNome/:nomeAula", autenticarUsuario, AulaController.buscarAulasPorNome);
 routes.get("/aula/buscarPorNomeCategoria/:nomeCategoria", autenticarUsuario, AulaController.buscarAulasPorCategoria);

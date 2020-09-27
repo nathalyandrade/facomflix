@@ -22,15 +22,62 @@ module.exports = {
     },
 
     async cadastrarAula (req, res){
-        return res.send("Entrei em cadastrarAula");
+        try {
+            let aula = req.body;
+            
+            if (aula != null) {
+                aula.quantidadeDeVisualizacoes = 0;
+                
+                aula = await models.Aula.create(aula);
+                return res
+                    .status(201)
+                    .json({ success: true, message: "Aula cadastrada!", aula: aula }).end();
+            }
+            throw new Error("Erro");
+
+        } catch (error) {
+            console.log(error.message);
+            return res
+                .status(500)
+                .json({ success: false, message: "Erro ao cadastrar aula" });
+        }
     },
 
     async apagarAula (req, res){
-        return res.send("Entrei no apagarAula");
+        try {
+            await models.Aula.destroy({
+                where: { id: req.params.id }
+            });
+
+            return res
+                .status(200)
+                .json({ sucess: true, message: "Aula removida"}).end();
+        } catch (error) {
+            return res
+                .status(500)
+                .json({ success: false, message: "Erro ao apagar aula" });
+        }
     },
 
     async editarAula (req, res){
-        return res.send("Entrei no editarAula");
+        try {
+            let aula = req.body;
+            
+            if (aula && aula.id) {
+                
+                aula = await models.Aula.update(aula, {where: {id: aula.id}});
+                return res
+                    .status(201)
+                    .json({ success: true, message: "Aula atualizada!").end();
+            }
+            throw new Error("Erro");
+
+        } catch (error) {
+            console.log(error.message);
+            return res
+                .status(500)
+                .json({ success: false, message: "Erro ao editar aula" });
+        }
     },
 
     async buscarAulasPorNome(req, res) {
