@@ -5,6 +5,7 @@ const routes = express.Router();
 const UsuarioController = require("./controllers/UsuarioController");
 const AulaController = require("./controllers/AulaController");
 const SerieController = require("./controllers/SerieController");
+const CategoriaController = require("./controllers/CategoriaController");
 
 const autenticarUsuario = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -45,5 +46,10 @@ routes.get("/serie", autenticarUsuario, SerieController.mostrarSeries);
 routes.post("/serie", autenticarUsuario, SerieController.cadastrarSerie);
 routes.delete("/serie/:id", autenticarUsuario, SerieController.apagarSerie);
 routes.put("/serie", autenticarUsuario, SerieController.editarSerie);
+
+routes.get("/categoria", autenticarUsuario, CategoriaController.buscarCategorias);
+routes.post("/categoria", autenticarUsuario, CategoriaController.cadastrarCategoria);
+routes.delete("/categoria/:id", autenticarUsuario, CategoriaController.apagarCategoria);
+routes.put("/categoria", autenticarUsuario, CategoriaController.editarCategoria);
 
 module.exports = routes;
