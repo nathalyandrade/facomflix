@@ -33,17 +33,17 @@ routes.post("/usuario/login", UsuarioController.loginUsuario); // login usuario
 routes.post("/usuario/testarLogin", autenticarUsuario, UsuarioController.testarLogin); // testar autenticacao
 
 
-routes.get("/aula", AulaController.mostrarAulas);
-routes.post("/aula", AulaController.cadastrarAula);
-routes.delete("/aula/:id", AulaController.apagarAula);
-routes.put("/aula", AulaController.editarAula);
+routes.get("/aula", autenticarUsuario, AulaController.mostrarAulas);
+routes.post("/aula", autenticarUsuario, AulaController.cadastrarAula);
+routes.delete("/aula/:id", autenticarUsuario, AulaController.apagarAula);
+routes.put("/aula", autenticarUsuario, AulaController.editarAula);
 routes.get("/aula/buscarPorNome/:nomeAula", autenticarUsuario, AulaController.buscarAulasPorNome);
 routes.get("/aula/buscarPorNomeCategoria/:nomeCategoria", autenticarUsuario, AulaController.buscarAulasPorCategoria);
 
 
-routes.get("/serie", SerieController.mostrarSeries);
-routes.post("/serie", SerieController.cadastrarSerie);
-routes.delete("/serie/:id", SerieController.apagarSerie);
-routes.put("/serie", SerieController.editarSerie);
+routes.get("/serie", autenticarUsuario, SerieController.mostrarSeries);
+routes.post("/serie", autenticarUsuario, SerieController.cadastrarSerie);
+routes.delete("/serie/:id", autenticarUsuario, SerieController.apagarSerie);
+routes.put("/serie", autenticarUsuario, SerieController.editarSerie);
 
 module.exports = routes;

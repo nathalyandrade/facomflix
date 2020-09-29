@@ -47,6 +47,7 @@ module.exports = {
     async loginUsuario(req, res) {
         try {
             let usuario = await models.Usuario.findOne({ where: { login: req.body.login } });
+            
             if(usuario){
                 if (await bcrypt.compare(req.body.senha, usuario.senha)) {
                     let nome = { nome: usuario.nome };
