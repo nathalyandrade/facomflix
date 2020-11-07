@@ -38,9 +38,8 @@
     </v-app-bar>
 
     <v-main>
-      <!-- <HelloWorld/> -->
       <div>
-          As outras telas irão aparecer aqui
+          As outras telas irão aparecer aqui, ao clicar ali em cima nas opções
       </div>
     </v-main>
   </v-app>
