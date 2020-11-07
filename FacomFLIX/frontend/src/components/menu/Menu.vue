@@ -1,10 +1,5 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
-    
-
-  <!-- <v-app>
+  <v-app>
     <v-app-bar
       app
       color="primary"
@@ -43,25 +38,21 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <!-- <HelloWorld/> -->
+      <div>
+          As outras telas irão aparecer aqui
+      </div>
     </v-main>
-  </v-app> -->
-
+  </v-app>
 </template>
 
 <script>
 export default {
-  name: "app",
-};
+    name: "Menu"
+
+}
 </script>
 
 <style>
-/* body {
-  background-color: #f7f7f7;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-.is-danger {
-  color: #9f3a38;
-} */
+
 </style>
