@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Auth from './middleware/auth';
 
 import Login from '@/components/Login';
 import Menu from '@/components/menu/Menu';
+import CadastroAula from '@/components/menu/CadastroAula.vue';
+import CadastroSerie from '@/components/menu/CadastroSerie.vue';
 
-import auth from './middleware/auth';
 
 Vue.use(Router);
 
@@ -17,7 +19,17 @@ export default new Router({
         {
             path: '/',
             component: Menu,
-            beforeEnter: auth
+            beforeEnter: Auth,
+            children: [
+                {
+                    path: 'cadastro-aula',
+                    component: CadastroAula
+                },
+                {
+                    path: 'cadastro-serie',
+                    component: CadastroSerie
+                }
+            ]
         }
     ]
 });

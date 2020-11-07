@@ -1,13 +1,9 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
+    <v-app-bar app color="primary" dark>
+      <!-- <div class="d-flex align-center">
         <v-img
-          alt="Vuetify Logo"
+        alt="Vuetify Logo"
           class="shrink mr-2"
           contain
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
@@ -23,23 +19,40 @@
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
           width="100"
         />
-      </div>
+      </div> -->
+
+      <router-link
+        to="cadastro-serie"
+        v-slot="{ href, navigate, isActive}"
+      >
+        <v-btn :active="isActive" :href="href" text @click="navigate">
+          <span class="mr-2">Cadastro Serie</span>
+        </v-btn>
+        
+
+      </router-link>
+
+      <router-link
+        to="cadastro-aula"
+        v-slot="{ href, navigate, isActive}"
+      >
+        <v-btn :active="isActive" :href="href" text @click="navigate">
+          <span class="mr-2">Cadastro Aula</span>
+        </v-btn>
+        
+
+      </router-link>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn href="login" text>
+        <span class="mr-2">Login</span>
       </v-btn>
     </v-app-bar>
 
     <v-main>
       <div>
-          As outras telas irão aparecer aqui, ao clicar ali em cima nas opções
+          <router-view></router-view>
       </div>
     </v-main>
   </v-app>
@@ -47,8 +60,7 @@
 
 <script>
 export default {
-    name: "Menu"
-
+    name: "Menu",
 }
 </script>
 
