@@ -37,8 +37,17 @@
 
 <script>
 
+import axios from '../../services/api';
+
 function cadastrarAula(aula) {
-    alert(`${aula.nome} - ${aula.link}`)
+    aula.usuarioUpload = 8;
+    aula.serie = 2;
+    aula.categoria = 2;
+    axios.post('/api/aula', aula).then(r => {
+        if (r.data.sucess) {
+            alert(r.data.message);
+        }
+    });
 }
 
 export default {

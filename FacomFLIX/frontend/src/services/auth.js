@@ -5,7 +5,7 @@ export const autenticado = () => {
 } 
 
 export const getToken = () => {
-    localStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem(TOKEN_KEY);
 }
 
 export const login = token => {
