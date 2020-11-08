@@ -45,8 +45,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn href="login" text>
-        <span class="mr-2">Login</span>
+      <v-btn @click="deslogar" text>
+        <span class="mr-2">Logout</span>
       </v-btn>
     </v-app-bar>
 
@@ -59,8 +59,17 @@
 </template>
 
 <script>
+
+import { logout } from "../../services/auth";
+
 export default {
     name: "Menu",
+    methods: {
+      deslogar: function() {
+        logout();
+        this.$router.push('login');
+      }
+    }
 }
 </script>
 
