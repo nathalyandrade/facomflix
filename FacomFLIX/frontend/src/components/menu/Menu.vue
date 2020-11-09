@@ -22,7 +22,7 @@
       </div> -->
 
       <router-link
-        to="cadastro-serie"
+        to="/series/nova"
         v-slot="{ href, navigate, isActive}"
       >
         <v-btn :active="isActive" :href="href" text @click="navigate">
@@ -33,11 +33,22 @@
       </router-link>
 
       <router-link
-        to="cadastro-aula"
+        to="/aulas/nova"
         v-slot="{ href, navigate, isActive}"
       >
         <v-btn :active="isActive" :href="href" text @click="navigate">
           <span class="mr-2">Cadastro Aula</span>
+        </v-btn>
+        
+
+      </router-link>
+
+      <router-link
+        to="/aulas"
+        v-slot="{ href, navigate, isActive}"
+      >
+        <v-btn :active="isActive" :href="href" text @click="navigate">
+          <span class="mr-2">Aulas</span>
         </v-btn>
         
 
