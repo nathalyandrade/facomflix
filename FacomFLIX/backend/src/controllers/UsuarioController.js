@@ -40,7 +40,7 @@ module.exports = {
             console.log(error.message);
             return res
                 .status(500)
-                .json({ success: false, message: "Erro ao encontrar tipo usuario" });
+                .json({ success: false, message: "Erro ao cadastrar usuario" });
         }
     },
 
@@ -64,23 +64,23 @@ module.exports = {
 
                     return res
                         .status(200)
-                        .json({ message: "Usuário logado com sucesso" , success: true, usuario: usuarioLogado });
+                        .json({ message: "Usuário logado com sucesso." , success: true, usuario: usuarioLogado });
                 } else {
                     return res
-                        .status(500)
-                        .json({ message: "Senha incorreta" , success: true });
+                        .status(401)
+                        .json({ message: "Senha incorreta." , success: true });
                 }
             } else {
                 return res
-                    .status(500)
-                    .json({ message: "Usuário ou senha incorreto" , success: true });
+                    .status(401)
+                    .json({ message: "Usuário ou senha incorreto." , success: true });
             }
             
         } catch (error) {
             console.log(error.message);
             return res
                 .status(500)
-                .json({ success: false, message: "Erro ao encontrar tipo usuario" });
+                .json({ success: false, message: "Error interno ao tentar logar." });
         }
     },
 

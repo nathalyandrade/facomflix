@@ -67,7 +67,8 @@ export default {
     methods: {
       deslogar: function() {
         logout();
-        this.$router.push('login');
+        this.$router.push('/login');
+        this.$toast.info("Usuário deslogado.");  
       }
     }
 }

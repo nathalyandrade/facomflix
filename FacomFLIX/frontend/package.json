@@ -12,8 +12,9 @@
     "core-js": "^3.6.5",
     "vee-validate": "^2.2.15",
     "vue": "^2.6.11",
-    "vue-router": "^3.4.8",
-    "vuetify": "^2.2.11"
+    "vue-router": "^3.4.9",
+    "vuetify": "^2.2.11",
+    "vuetify-toast-snackbar-ng": "^0.7.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
