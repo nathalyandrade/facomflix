@@ -3,10 +3,10 @@
     <v-card class="mx-auto my-12" width="500px" max-height="550px">
       <!-- <v-row class="text-center ma-0 pa-2"> -->
       <div class="text-center pa-2">
-        <v-btn text color="primary" v-on:click="loginOuCadastrar(true)">
+        <v-btn text color="primary" v-bind:class="{ clicado: loginUsuario}"  v-on:click="loginOuCadastrar(true)">
           Login
         </v-btn>
-        <v-btn text color="primary" v-on:click="loginOuCadastrar(false)">
+        <v-btn text color="primary" v-bind:class="{ clicado: !loginUsuario}"  v-on:click="loginOuCadastrar(false)">
           Cadastrar-se
         </v-btn>
       </div>
@@ -241,4 +241,8 @@ export default {
 </script>
 
 <style scoped>
+.clicado {
+  background-color:#BBDEFB;
+}
+
 </style>
