@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         buscarAulas() {
-            axios.get('/api/aula').then(r => {
+            axios.get('/aula').then(r => {
                 this.aulas = r.data;
                 this.aulas.forEach(aula => {
                     let video_id = aula.link.split('v=')[1];

@@ -23,7 +23,7 @@ export default {
         aula: {}
     }),
     created() {
-        axios.get(`/api/aula`)
+        axios.get(`/aula`)
             .then( r => {
                 const aulas = r.data;
                 aulas.forEach(a => {

@@ -20,38 +20,34 @@
           width="100"
         />
       </div> -->
+      <div v-if="tipoUsuario == 'PROFESSOR'">
+        <!-- colocar coisas que so professor pode ver  -->
 
-      <router-link
-        to="/series/nova"
-        v-slot="{ href, navigate, isActive}"
-      >
-        <v-btn :active="isActive" :href="href" text @click="navigate">
-          <span class="mr-2">Cadastro Serie</span>
-        </v-btn>
-        
+        <router-link to="/series/nova" v-slot="{ href, navigate, isActive }">
+          <v-btn :active="isActive" :href="href" text @click="navigate">
+            <span class="mr-2">Cadastro Serie</span>
+          </v-btn>
+        </router-link>
 
-      </router-link>
+        <router-link to="/aulas/nova" v-slot="{ href, navigate, isActive }">
+          <v-btn :active="isActive" :href="href" text @click="navigate">
+            <span class="mr-2">Cadastro Aula</span>
+          </v-btn>
+        </router-link>
+      </div>
 
-      <router-link
-        to="/aulas/nova"
-        v-slot="{ href, navigate, isActive}"
-      >
-        <v-btn :active="isActive" :href="href" text @click="navigate">
-          <span class="mr-2">Cadastro Aula</span>
-        </v-btn>
-        
+      <div v-if="tipoUsuario == 'ALUNO'">
+        <!-- colocar coisas que so aluno pode ver  -->
+      </div>
 
-      </router-link>
+      <div v-if="tipoUsuario == 'ADMINISTRADOR'">
+        <!-- colocar coisas que so administrador pode ver  -->
+      </div>
 
-      <router-link
-        to="/aulas"
-        v-slot="{ href, navigate, isActive}"
-      >
+      <router-link to="/aulas" v-slot="{ href, navigate, isActive }">
         <v-btn :active="isActive" :href="href" text @click="navigate">
           <span class="mr-2">Aulas</span>
         </v-btn>
-        
-
       </router-link>
 
       <v-spacer></v-spacer>
@@ -63,28 +59,32 @@
 
     <v-main>
       <div>
-          <router-view></router-view>
+        <router-view></router-view>
       </div>
     </v-main>
   </v-app>
 </template>
 
 <script>
-
-import { logout } from "../../services/auth";
+import { logout, verificarTipoUsuario } from "../../services/auth";
 
 export default {
-    name: "Menu",
-    methods: {
-      deslogar: function() {
-        logout();
-        this.$router.push('/login');
-        this.$toast.info("Usuário deslogado.");  
-      }
-    }
-}
+  name: "Menu",
+  created() {
+    this.tipoUsuario = verificarTipoUsuario();
+  },
+  data: () => ({
+    tipoUsuario: "",
+  }),
+  methods: {
+    deslogar: function () {
+      logout();
+      this.$router.push("/login");
+      this.$toast.info("Usuário deslogado.");
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

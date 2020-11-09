@@ -42,7 +42,7 @@ import axios from '../../services/api';
 
 function cadastrarSerie(serie) {
 
-    axios.post('/api/serie', serie).then(r => {
+    axios.post('/serie', serie).then(r => {
         if (r.data.sucess) {
             alert(r.data.message);
         }

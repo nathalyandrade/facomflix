@@ -5,7 +5,10 @@ export const autenticado = () => {
 } 
 
 export const getToken = () => {
-    return localStorage.getItem(TOKEN_KEY);
+    if (localStorage.getItem(TOKEN_KEY) != null && localStorage.getItem(TOKEN_KEY) != undefined ) {
+        return JSON.parse(localStorage.getItem(TOKEN_KEY)).token;
+    }
+    return null;    
 }
 
 export const salvarLogin = token => {
@@ -28,4 +31,11 @@ export const verificarTipoUsuario = () => {
         default:
             return 'ALUNO';
     }
+}
+
+export const getUsuarioLogado = () => {
+    if (localStorage.getItem(TOKEN_KEY) != null && localStorage.getItem(TOKEN_KEY) != undefined ) {
+        return JSON.parse(localStorage.getItem(TOKEN_KEY));
+    }
+    return null;  
 }

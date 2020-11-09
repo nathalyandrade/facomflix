@@ -34,6 +34,7 @@
 
                     <v-btn
                         class="mr-4"
+                        color="success"
                         type="submit"
                         :disabled="!valid"
                         @click="validate">
@@ -53,7 +54,7 @@ import axios from '../../services/api';
 function cadastrarAula(aula) {
     aula.usuarioUpload = 8;
     aula.categoria = 2;
-    axios.post('/api/aula', aula).then(r => {
+    axios.post('/aula', aula).then(r => {
         if (r.data.sucess) {
             alert(r.data.message);
         }
@@ -89,7 +90,7 @@ export default {
             this.$refs.form.reset();
         },
         buscarSeries() {
-            axios.get('/api/serie').then(r => {
+            axios.get('/serie').then(r => {
                 this.series = r.data;
             });
         }
