@@ -11,6 +11,8 @@ import Aula from '@/components/menu/Aula.vue';
 
 import CadastroSerie from '@/components/menu/CadastroSerie.vue';
 import GerenciarCategoria from '@/components/administrador/GerenciarCategoria.vue';
+import GerenciarEtiqueta from '@/components/administrador/GerenciarEtiqueta.vue';
+
 
 Vue.use(Router);
 
@@ -44,6 +46,10 @@ export default new Router({
                 {
                     path: 'gerenciar-categoria',
                     component: GerenciarCategoria
+                },
+                {
+                    path: 'gerenciar-etiqueta',
+                    component: GerenciarEtiqueta
                 }
             ]
         }

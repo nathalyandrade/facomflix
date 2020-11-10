@@ -47,6 +47,13 @@
             <span class="mr-2">Gerenciar Categorias</span>
           </v-btn>
         </router-link>
+
+        <router-link to="/gerenciar-etiqueta" v-slot="{ href, navigate, isActive }">
+          <v-btn :active="isActive" :href="href" text @click="navigate">
+            <span class="mr-2">Gerenciar Etiquetas</span>
+          </v-btn>
+        </router-link>
+
       </div>
 
       <router-link to="/aulas" v-slot="{ href, navigate, isActive }">

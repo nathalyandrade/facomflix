@@ -6,6 +6,7 @@ const UsuarioController = require("./controllers/UsuarioController");
 const AulaController = require("./controllers/AulaController");
 const SerieController = require("./controllers/SerieController");
 const CategoriaController = require("./controllers/CategoriaController");
+const EtiquetaController = require("./controllers/EtiquetaController");
 
 const autenticarUsuario = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -51,5 +52,10 @@ routes.get("/categoria", autenticarUsuario, CategoriaController.buscarCategorias
 routes.post("/categoria", autenticarUsuario, CategoriaController.cadastrarCategoria);
 routes.delete("/categoria/:id", autenticarUsuario, CategoriaController.apagarCategoria);
 routes.put("/categoria", autenticarUsuario, CategoriaController.editarCategoria);
+
+routes.get("/etiqueta", autenticarUsuario, EtiquetaController.buscarEtiquetas);
+routes.post("/etiqueta", autenticarUsuario, EtiquetaController.cadastrarEtiqueta);
+routes.delete("/etiqueta/:id", autenticarUsuario, EtiquetaController.apagarEtiqueta);
+routes.put("/etiqueta", autenticarUsuario, EtiquetaController.editarEtiqueta);
 
 module.exports = routes;
