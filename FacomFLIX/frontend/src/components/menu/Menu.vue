@@ -42,6 +42,11 @@
 
       <div v-if="tipoUsuario == 'ADMINISTRADOR'">
         <!-- colocar coisas que so administrador pode ver  -->
+        <router-link to="/gerenciar-categoria" v-slot="{ href, navigate, isActive }">
+          <v-btn :active="isActive" :href="href" text @click="navigate">
+            <span class="mr-2">Gerenciar Categorias</span>
+          </v-btn>
+        </router-link>
       </div>
 
       <router-link to="/aulas" v-slot="{ href, navigate, isActive }">

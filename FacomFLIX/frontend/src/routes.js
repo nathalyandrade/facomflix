@@ -10,7 +10,7 @@ import Aulas from '@/components/menu/Aulas.vue';
 import Aula from '@/components/menu/Aula.vue';
 
 import CadastroSerie from '@/components/menu/CadastroSerie.vue';
-
+import GerenciarCategoria from '@/components/administrador/GerenciarCategoria.vue';
 
 Vue.use(Router);
 
@@ -40,6 +40,10 @@ export default new Router({
                 {
                     path: 'series/nova',
                     component: CadastroSerie
+                },
+                {
+                    path: 'gerenciar-categoria',
+                    component: GerenciarCategoria
                 }
             ]
         }
