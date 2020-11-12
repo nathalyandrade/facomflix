@@ -41,7 +41,7 @@ routes.delete("/aula/:id", autenticarUsuario, AulaController.apagarAula);
 routes.put("/aula", autenticarUsuario, AulaController.editarAula);
 routes.get("/aula/buscarPorNome/:nomeAula", autenticarUsuario, AulaController.buscarAulasPorNome);
 routes.get("/aula/buscarPorNomeCategoria/:nomeCategoria", autenticarUsuario, AulaController.buscarAulasPorCategoria);
-
+routes.post("/aula/busca-dinamica", autenticarUsuario, AulaController.buscarAulaPorNomeECategoria);
 
 routes.get("/serie", autenticarUsuario, SerieController.mostrarSeries);
 routes.post("/serie", autenticarUsuario, SerieController.cadastrarSerie);

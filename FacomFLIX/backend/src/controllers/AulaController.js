@@ -1,11 +1,26 @@
 require('dotenv').config();
 const { models, model } = require('../../configBD');
 const { Op } = require("sequelize");
+const sequelize = require('../../configBD');
 
 module.exports = {
     async mostrarAulas (req, res) {
         try {
-            const Aula = await models.Aula.findAll();
+            const Aula = await models.Aula.findAll({
+                order:[
+                    ['categoria', 'ASC']
+                ],
+                include: [
+                    { model: models.Categoria, as: 'detalhesCategoria'}, 
+                    { model: models.SerieAula, as: 'detalhesSerie'},
+                    { model: models.Etiqueta, as: 'listaEtiquetas',
+                    attributes: ["id", "nome"], // definir os atributos que podem vir da tabela etiqueta
+                    through: {
+                        attributes: [], // deixar apenas os atributos de etiqueta
+                      }
+                    }
+                ] 
+            });
     
             if (Aula) {
                 return res.json(Aula);
@@ -142,7 +157,60 @@ module.exports = {
                 .status(500)
                 .json({message: "Erro ao buscar aula por nome da categoria"});
         }
+    },
+
+    async buscarAulaPorNomeECategoria(req, res){
+        try {
+            let where = '';
+            let parametros = req.body; 
+
+            if (parametros.nomeAula != ""){
+                where = { nome: { [Op.iLike]: '%'+parametros.nomeAula+'%'} };
+
+                if (parametros.categoria) {
+                    where = { nome: { [Op.iLike]: '%'+parametros.nomeAula+'%'}, categoria: parametros.categoria  } ;
+                }
+            } else if (parametros.categoria) {
+                where = { categoria:parametros.categoria};
+            }
+
+            const listaAulas = await models.Aula.findAll({
+                where: where, 
+                include: 
+                [
+                    {   
+                        model: models.Categoria, 
+                        as: 'detalhesCategoria'
+                    },
+                    { model: models.SerieAula, as: 'detalhesSerie'},
+                    { model: models.Etiqueta, as: 'listaEtiquetas',
+                    attributes: ["id", "nome"], // definir os atributos que podem vir da tabela etiqueta
+                    through: {
+                        attributes: [], // deixar apenas os atributos de etiqueta
+                      }
+                    }
+                ] 
+
+            });
+    
+            if(listaAulas) {
+                return res
+                    .status(200)
+                    .json(listaAulas);
+            }
+
+            return res
+                .status(200)
+                .json([]);
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(500)
+                .json({message: "Erro ao buscar aula por nome da categoria"});
+        }
     }
+
+
     
 }
 
