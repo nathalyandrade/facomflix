@@ -28,7 +28,9 @@ var sequelize = new Sequelize('drj55vn7c0l36', 'fcaqeicsrqrwzg', 'bd8eb106388752
     require('./src/models/Serie'),
     require('./src/models/Categoria'),
     require('./src/models/Aula'),
-    require('./src/models/Etiqueta')
+    require('./src/models/Etiqueta'),
+    require('./src/models/AulaEtiqueta')
+
 
 	// Add more models here...
 	// require('./models/item'),

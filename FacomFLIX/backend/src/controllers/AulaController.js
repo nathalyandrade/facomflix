@@ -84,7 +84,16 @@ module.exports = {
         try {
             const listaAulas = await models.Aula.findAll({ 
                 where: { nome: { [Op.iLike]: '%'+req.params.nomeAula+'%'} }, 
-                include: [{ model: models.Categoria, as: 'detalhesCategoria'}, { model: models.SerieAula, as: 'detalhesSerie'}] 
+                include: [
+                    { model: models.Categoria, as: 'detalhesCategoria'}, 
+                    { model: models.SerieAula, as: 'detalhesSerie'},
+                    { model: models.Etiqueta, as: 'listaEtiquetas',
+                    attributes: ["id", "nome"], // definir os atributos que podem vir da tabela etiqueta
+                    through: {
+                        attributes: [], // deixar apenas os atributos de etiqueta
+                      }
+                    }
+                ] 
             }); // required: true, para trazer apenas aulas vinculadas com o Model Categorias
             if(listaAulas) {
                 return res
@@ -112,8 +121,10 @@ module.exports = {
                         as: 'detalhesCategoria',
                         where: { nome: { [Op.iLike]: '%'+req.params.nomeCategoria+'%' }},
                     },
-                    { model: models.SerieAula, as: 'detalhesSerie'}
+                    { model: models.SerieAula, as: 'detalhesSerie'},
+                    {model: models.Etiqueta, as: 'listaEtiquetas'}
                 ] 
+
             });
     
             if(listaAulas) {
