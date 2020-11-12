@@ -207,6 +207,27 @@ module.exports = {
             return res
                 .status(500)
                 .json({message: "Erro ao buscar aula por nome da categoria"});
+
+        }
+    },
+    
+    async incrementarVisualizacoes(req, res) {
+        try {
+            
+            if (req.params.id) {
+                
+                aula = await models.Aula.increment('quantidadeDeVisualizacoes', {where: {id: req.params.id}});
+                return res
+                    .status(201)
+                    .json({ success: true, message: "Visualizações incrementadas!"}).end();
+            }
+            throw new Error("Erro");
+
+        } catch (error) {
+            console.log(error.message);
+            return res
+                .status(500)
+                .json({ success: false, message: "Erro ao editar aula" });
         }
     }
 

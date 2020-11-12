@@ -23,15 +23,15 @@
       <div v-if="tipoUsuario == 'PROFESSOR'">
         <!-- colocar coisas que so professor pode ver  -->
 
-        <router-link to="/series/nova" v-slot="{ href, navigate, isActive }">
+        <router-link to="/series/gerenciar" v-slot="{ href, navigate, isActive }">
           <v-btn :active="isActive" :href="href" text @click="navigate">
-            <span class="mr-2">Cadastro Serie</span>
+            <span class="mr-2">Gerenciar Series</span>
           </v-btn>
         </router-link>
 
-        <router-link to="/aulas/nova" v-slot="{ href, navigate, isActive }">
+         <router-link to="/aulas/gerenciar" v-slot="{ href, navigate, isActive }">
           <v-btn :active="isActive" :href="href" text @click="navigate">
-            <span class="mr-2">Cadastro Aula</span>
+            <span class="mr-2">Gerenciar Aulas</span>
           </v-btn>
         </router-link>
       </div>
