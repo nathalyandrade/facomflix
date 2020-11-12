@@ -18,11 +18,16 @@
 
 import axios from '../../services/api';
 
+function incrementarVisualizacoes(aulaId) {
+    axios.post(`/aula/incrementarVisualizacoes/${aulaId}`);
+}
+
 export default {
     data: () => ({
         aula: {}
     }),
     created() {
+
         axios.get(`/aula`)
             .then( r => {
                 const aulas = r.data;
@@ -30,6 +35,7 @@ export default {
                     if (a.id == this.$route.params.id) {
                         this.aula = a;
                         this.aula.link = this.aula.link.replace("watch?v=", "embed/");
+                        incrementarVisualizacoes(a.id);
                     }
                 })
             })

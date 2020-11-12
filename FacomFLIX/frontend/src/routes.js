@@ -5,11 +5,11 @@ import auth from './middleware/auth';
 import Login from '@/components/Login';
 import Menu from '@/components/menu/Menu';
 
-import CadastroAula from '@/components/menu/CadastroAula.vue';
 import Aulas from '@/components/menu/Aulas.vue';
 import Aula from '@/components/menu/Aula.vue';
+import GerenciarAula from '@/components/menu/GerenciarAula.vue'
 
-import CadastroSerie from '@/components/menu/CadastroSerie.vue';
+import GerenciarSerie from '@/components/menu/GerenciarSerie.vue';
 import GerenciarCategoria from '@/components/administrador/GerenciarCategoria.vue';
 import GerenciarEtiqueta from '@/components/administrador/GerenciarEtiqueta.vue';
 
@@ -28,8 +28,8 @@ export default new Router({
             beforeEnter: auth,
             children: [
                 {
-                    path: 'aulas/nova',
-                    component: CadastroAula
+                    path: 'aulas/gerenciar',
+                    component: GerenciarAula
                 },
                 {
                     path: 'aulas/:id',
@@ -40,8 +40,8 @@ export default new Router({
                     component: Aulas,
                 },
                 {
-                    path: 'series/nova',
-                    component: CadastroSerie
+                    path: 'series/gerenciar',
+                    component: GerenciarSerie
                 },
                 {
                     path: 'gerenciar-categoria',

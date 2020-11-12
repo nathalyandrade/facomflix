@@ -32,6 +32,8 @@
                         persistent-hint
                         ></v-select>
 
+                    
+
                     <v-btn
                         class="mr-4"
                         color="success"
@@ -50,13 +52,14 @@
 <script>
 
 import axios from '../../services/api';
+import {getUsuarioLogado} from '../../services/auth';
 
 function cadastrarAula(aula) {
-    aula.usuarioUpload = 8;
+    aula.usuarioUpload = getUsuarioLogado().id;
     aula.categoria = 2;
     axios.post('/aula', aula).then(r => {
         if (r.data.sucess) {
-            alert(r.data.message);
+            this.$toast.info("Aula cadastrada!");
         }
     });
 }

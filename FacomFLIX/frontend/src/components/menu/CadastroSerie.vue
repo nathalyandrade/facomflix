@@ -41,10 +41,9 @@
 import axios from '../../services/api';
 
 function cadastrarSerie(serie) {
-
     axios.post('/serie', serie).then(r => {
         if (r.data.sucess) {
-            alert(r.data.message);
+             this.$toast.info("Série cadastrada!");
         }
     });
 }
