@@ -43,6 +43,10 @@ routes.get("/aula/buscarPorNome/:nomeAula", autenticarUsuario, AulaController.bu
 routes.get("/aula/buscarPorNomeCategoria/:nomeCategoria", autenticarUsuario, AulaController.buscarAulasPorCategoria);
 routes.post("/aula/busca-dinamica", autenticarUsuario, AulaController.buscarAulaPorNomeECategoria);
 routes.post("/aula/incrementarVisualizacoes/:id", autenticarUsuario, AulaController.incrementarVisualizacoes);
+routes.get("/aula/comentarios/:aulaId", autenticarUsuario, ComentarioController.buscarPorAula);
+
+routes.post("/comentario/novo", autenticarUsuario, ComentarioController.cadastrarComentario);
+
 
 
 routes.get("/serie", autenticarUsuario, SerieController.mostrarSeries);
