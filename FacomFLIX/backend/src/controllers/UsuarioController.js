@@ -84,20 +84,49 @@ module.exports = {
         }
     },
 
-    async testarLogin(req, res){
+    async buscarUsuarioPorLogin(req, res) {
         try {
-            let usuario = await models.Usuario.findOne({ where: { login: req.body.login } });
-            if(usuario){
+            let usuario = await models.Usuario.findOne({ where: { login: req.params.login } });
+            if(usuario) {
+                usuario.senha = "";
                 return res
                     .status(200)
-                    .json({ message: "Token ta onnnnnnnnnnn!!!!!!!!!!!" , success: true, usuario: usuario });
+                    .json(usuario);
             }
             
         } catch (error) {
             console.log(error.message);
             return res
                 .status(500)
-                .json({ success: false, message: "Erro ao encontrar tipo usuario" });
+                .json({ success: false, message: "Erro ao encontrar usuario" });
+        }
+    },
+
+    async editarUsuario(req, res) {
+        try {
+            let usuarioParaEdicao = req.body;
+            let usuarioBanco = await models.Usuario.findOne({ where: { login: req.body.login } });
+            
+            usuarioBanco.nome = usuarioParaEdicao.nome;
+            usuarioBanco.email = usuarioParaEdicao.email;
+            usuarioBanco.matricula = usuarioParaEdicao.matricula;
+
+            if (usuarioParaEdicao.senha != '' && usuarioParaEdicao.senha != undefined) {
+                usuarioBanco.senha = usuarioParaEdicao.senha != '' ? await bcrypt.hash(usuarioParaEdicao.senha , bcrypt.genSaltSync(8)) : usuarioBanco.senha;
+                console.log('tenha depois do hash', usuarioBanco.senha);
+            }
+
+            usuarioBanco.save();
+                
+            return res
+                .status(200)
+                .json({ message: "Usuário alterado com sucesso." , success: true, usuario: usuarioBanco });         
+            
+        } catch (error) {
+            console.log(error.message);
+            return res
+                .status(500)
+                .json({ success: false, message: "Error interno ao tentar editar usuario." });
         }
     }
 

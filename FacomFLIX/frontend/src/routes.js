@@ -12,7 +12,7 @@ import GerenciarAula from '@/components/menu/GerenciarAula.vue'
 import GerenciarSerie from '@/components/menu/GerenciarSerie.vue';
 import GerenciarCategoria from '@/components/administrador/GerenciarCategoria.vue';
 import GerenciarEtiqueta from '@/components/administrador/GerenciarEtiqueta.vue';
-
+import GerenciarUsuario from '@/components/geral/GerenciarUsuario.vue';
 
 Vue.use(Router);
 
@@ -50,6 +50,10 @@ export default new Router({
                 {
                     path: 'gerenciar-etiqueta',
                     component: GerenciarEtiqueta
+                },
+                {
+                    path: 'gerenciar-usuario',
+                    component: GerenciarUsuario
                 }
             ]
         }

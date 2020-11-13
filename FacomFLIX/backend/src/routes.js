@@ -32,8 +32,8 @@ const autenticarUsuario = (req, res, next) => {
 routes.get("/usuario", UsuarioController.mostrarTipoUsuario); // mostrar tipo usuarios disponiveis
 routes.post("/usuario", UsuarioController.cadastrarUsuario); // cadastrar usuario
 routes.post("/usuario/login", UsuarioController.loginUsuario); // login usuario
-routes.post("/usuario/testarLogin", autenticarUsuario, UsuarioController.testarLogin); // testar autenticacao
-
+routes.get("/usuario/dados-usuario/:login", autenticarUsuario, UsuarioController.buscarUsuarioPorLogin); // buscar dados de usuario por login
+routes.put('/usuario', autenticarUsuario, UsuarioController.editarUsuario);
 
 routes.get("/aula", autenticarUsuario, AulaController.mostrarAulas);
 routes.post("/aula", autenticarUsuario, AulaController.cadastrarAula);

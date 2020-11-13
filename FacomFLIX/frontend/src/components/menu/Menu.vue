@@ -64,6 +64,10 @@
 
       <v-spacer></v-spacer>
 
+      <v-btn @click="alterarDados()" text>
+        <span class="mr-2">Alterar Dados</span>
+      </v-btn>
+      
       <v-btn @click="deslogar" text>
         <span class="mr-2">Logout</span>
       </v-btn>
@@ -94,6 +98,9 @@ export default {
       this.$router.push("/login");
       this.$toast.info("Usuário deslogado.");
     },
+    alterarDados () {
+      this.$router.push('/gerenciar-usuario');
+    }
   },
 };
 </script>
