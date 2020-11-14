@@ -1,35 +1,37 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <!-- <div class="d-flex align-center">
-        <v-img
-        alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div> -->
+      <div class="d-flex align-center pr-4">
+        <router-link 
+        to="/inicio"
+         v-slot="{ href, navigate, isActive }">
+          <v-icon
+          large
+            dark
+            :active="isActive"
+            :href="href"
+            @click="navigate"
+          >
+            mdi-home
+          </v-icon>
+        </router-link>
+      </div>
       <div v-if="tipoUsuario == 'PROFESSOR'">
         <!-- colocar coisas que so professor pode ver  -->
 
-        <router-link to="/series/gerenciar" v-slot="{ href, navigate, isActive }">
+        <router-link
+          to="/series/gerenciar"
+          v-slot="{ href, navigate, isActive }"
+        >
           <v-btn :active="isActive" :href="href" text @click="navigate">
             <span class="mr-2">Gerenciar Series</span>
           </v-btn>
         </router-link>
 
-         <router-link to="/aulas/gerenciar" v-slot="{ href, navigate, isActive }">
+        <router-link
+          to="/aulas/gerenciar"
+          v-slot="{ href, navigate, isActive }"
+        >
           <v-btn :active="isActive" :href="href" text @click="navigate">
             <span class="mr-2">Gerenciar Aulas</span>
           </v-btn>
@@ -42,18 +44,23 @@
 
       <div v-if="tipoUsuario == 'ADMINISTRADOR'">
         <!-- colocar coisas que so administrador pode ver  -->
-        <router-link to="/gerenciar-categoria" v-slot="{ href, navigate, isActive }">
+        <router-link
+          to="/gerenciar-categoria"
+          v-slot="{ href, navigate, isActive }"
+        >
           <v-btn :active="isActive" :href="href" text @click="navigate">
             <span class="mr-2">Gerenciar Categorias</span>
           </v-btn>
         </router-link>
 
-        <router-link to="/gerenciar-etiqueta" v-slot="{ href, navigate, isActive }">
+        <router-link
+          to="/gerenciar-etiqueta"
+          v-slot="{ href, navigate, isActive }"
+        >
           <v-btn :active="isActive" :href="href" text @click="navigate">
             <span class="mr-2">Gerenciar Etiquetas</span>
           </v-btn>
         </router-link>
-
       </div>
 
       <router-link to="/aulas" v-slot="{ href, navigate, isActive }">
@@ -64,13 +71,25 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn @click="alterarDados()" text>
-        <span class="mr-2">Alterar Dados</span>
-      </v-btn>
-      
-      <v-btn @click="deslogar" text>
-        <span class="mr-2">Logout</span>
-      </v-btn>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-avatar color="red darken-2" v-on="on" v-bind="attrs">
+            <v-icon dark> mdi-account-circle </v-icon>
+          </v-avatar>
+        </template>
+        <v-list>
+          <v-list-item>
+            <v-btn @click="alterarDados()" text>
+              <span class="mr-2">Alterar Dados</span>
+            </v-btn>
+          </v-list-item>
+          <v-list-item>
+            <v-btn @click="deslogar" text>
+              <span class="mr-2">Logout</span>
+            </v-btn>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
 
     <v-main>
@@ -98,9 +117,12 @@ export default {
       this.$router.push("/login");
       this.$toast.info("Usuário deslogado.");
     },
-    alterarDados () {
-      this.$router.push('/gerenciar-usuario');
-    }
+    alterarDados() {
+      this.$router.push("/gerenciar-usuario");
+    },
+    rotaInicio() {
+      this.$router.push("/inicio");
+    },
   },
 };
 </script>

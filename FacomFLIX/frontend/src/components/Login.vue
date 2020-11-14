@@ -194,7 +194,7 @@ export default {
           })
           .then((response) => {
             salvarLogin(response.data.usuario); // salvando usuario no local storage
-            this.$router.push("/");
+            this.$router.push("/inicio");
           })
           .catch((error) => {
             this.senha = "";

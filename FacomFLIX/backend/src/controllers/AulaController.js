@@ -2,6 +2,7 @@ require('dotenv').config();
 const { models, model } = require('../../configBD');
 const { Op } = require("sequelize");
 const sequelize = require('../../configBD');
+const { response } = require('express');
 
 module.exports = {
     async mostrarAulas (req, res) {
@@ -228,6 +229,72 @@ module.exports = {
             return res
                 .status(500)
                 .json({ success: false, message: "Erro ao editar aula" });
+        }
+    },
+
+    async buscarAulasPorUsuario(req, res) {
+        try {
+            const Aula = await models.Aula.findAll({
+                where: { usuarioUpload: req.params.usuarioUpload }, 
+                order:[
+                    ['nome', 'ASC']
+                ],
+                include: [
+                    { model: models.Categoria, as: 'detalhesCategoria'}, 
+                    { model: models.SerieAula, as: 'detalhesSerie'},
+                    { model: models.Etiqueta, as: 'listaEtiquetas',
+                    attributes: ["id", "nome"], // definir os atributos que podem vir da tabela etiqueta
+                    through: {
+                        attributes: [], // deixar apenas os atributos de etiqueta
+                      }
+                    }
+                ] 
+            });
+    
+            if (Aula) {
+                return res.json(Aula);
+            }
+    
+            throw new Error("Erro");
+    
+        } catch (e) {
+            console.log(e.message);
+            return res
+                .status(500)
+                .json({ success: false, message: "Erro ao encontrar aula" });
+        }
+    },
+
+    async buscarQuantidadeVisualizacaoAulas(req, res){
+        try {
+            const aula = await models.Aula.findOne({
+                group: ['usuarioUpload'],
+                attributes: ['usuarioUpload', [sequelize.fn('COUNT','quantidadeDeVisualizacoes'), 'quantidadeDeVisualizacoes']],
+                order:[
+                    [sequelize.col('quantidadeDeVisualizacoes'), 'DESC']
+                ]
+            })
+            
+            const usuarioUpload = await models.Usuario.findByPk(aula.usuarioUpload);
+            
+            let usuarioDestaque = {
+                nome: usuarioUpload.nome,
+                email: usuarioUpload.email,
+                quantidadeDeVisualizacoes: aula.quantidadeDeVisualizacoes
+            } 
+            if (usuarioDestaque) {
+                return res
+                .status(200)
+                .json(usuarioDestaque);
+            }
+    
+            throw new Error("Erro");
+    
+        } catch (e) {
+            console.log(e.message);
+            return res
+                .status(500)
+                .json({ success: false, message: "Erro ao localizar usuario destaque" });
         }
     }
 

@@ -77,7 +77,27 @@ module.exports = {
                 .status(500)
                 .json({ success: false, message: "Erro ao editar serie" });
         }
-    }
+    },
+
+    async mostrarSeriesPorUsuario (req, res) {
+        try {
+            const Serie = await models.SerieAula.findAll({
+                where: { usuarioUpload: req.params.usuarioUpload }
+            });
+    
+            if (Serie) {
+                return res.json(Serie);
+            }
+    
+            throw new Error("Erro");
+    
+        } catch (e) {
+            console.log(e.message);
+            return res
+                .status(500)
+                .json({ success: false, message: "Erro ao encontrar serie" });
+        }
+    },
 }
 
 

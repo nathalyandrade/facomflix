@@ -7,6 +7,7 @@ const AulaController = require("./controllers/AulaController");
 const SerieController = require("./controllers/SerieController");
 const CategoriaController = require("./controllers/CategoriaController");
 const EtiquetaController = require("./controllers/EtiquetaController");
+const ComentarioController = require("./controllers/ComentarioController");
 
 const autenticarUsuario = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -44,6 +45,8 @@ routes.get("/aula/buscarPorNomeCategoria/:nomeCategoria", autenticarUsuario, Aul
 routes.post("/aula/busca-dinamica", autenticarUsuario, AulaController.buscarAulaPorNomeECategoria);
 routes.post("/aula/incrementarVisualizacoes/:id", autenticarUsuario, AulaController.incrementarVisualizacoes);
 routes.get("/aula/comentarios/:aulaId", autenticarUsuario, ComentarioController.buscarPorAula);
+routes.get("/aula/:usuarioUpload", autenticarUsuario, AulaController.buscarAulasPorUsuario);
+routes.get('/aula/quantidadeAula/destaque', autenticarUsuario, AulaController.buscarQuantidadeVisualizacaoAulas);
 
 routes.post("/comentario/novo", autenticarUsuario, ComentarioController.cadastrarComentario);
 

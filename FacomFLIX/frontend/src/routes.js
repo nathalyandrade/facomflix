@@ -4,6 +4,7 @@ import auth from './middleware/auth';
 
 import Login from '@/components/Login';
 import Menu from '@/components/menu/Menu';
+import Inicio from '@/components/geral/Inicio.vue';
 
 import Aulas from '@/components/menu/Aulas.vue';
 import Aula from '@/components/menu/Aula.vue';
@@ -54,6 +55,10 @@ export default new Router({
                 {
                     path: 'gerenciar-usuario',
                     component: GerenciarUsuario
+                }, 
+                {
+                    path: 'inicio',
+                    component: Inicio
                 }
             ]
         }

@@ -112,6 +112,8 @@
 </template>
 
 <script>
+import { getUsuarioLogado } from "../../services/auth";
+
 export default {
   name: "GerenciarAula",
   data: () => ({
@@ -133,8 +135,9 @@ export default {
   },
   methods: {
     buscarAulas() {
+      let usuario = getUsuarioLogado();
       this.$http
-        .get("/aula")
+        .get("/aula/" + usuario.id)
         .then((response) => {
           this.listaAulas = response.data;
         })
