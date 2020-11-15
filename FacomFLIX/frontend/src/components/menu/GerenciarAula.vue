@@ -241,6 +241,7 @@ export default {
           .put("/aula", {
             id: this.aulaSelecionada.id,
             nome: this.aulaSelecionada.nome,
+            link: this.aulaSelecionada.link,
             serie: this.serie.id,
             categoria: this.categoria.id,
           })
