@@ -296,6 +296,41 @@ module.exports = {
                 .status(500)
                 .json({ success: false, message: "Erro ao localizar usuario destaque" });
         }
+    },
+
+    async buscarAulasDestaque(req, res){
+        try {
+            const aulas = await models.Aula.findAll({
+                order:[
+                    [sequelize.col('quantidadeDeVisualizacoes'), 'DESC']
+                ],
+                limit: 3,
+                include: [
+                    { model: models.Categoria, as: 'detalhesCategoria'}, 
+                    { model: models.SerieAula, as: 'detalhesSerie'},
+                    { model: models.Etiqueta, as: 'listaEtiquetas',
+                    attributes: ["id", "nome"], // definir os atributos que podem vir da tabela etiqueta
+                    through: {
+                        attributes: [], // deixar apenas os atributos de etiqueta
+                      }
+                    }
+                ] 
+            });
+
+            if (aulas) {
+                return res
+                .status(200)
+                .json(aulas);
+            }
+    
+            throw new Error("Erro");
+    
+        } catch (e) {
+            console.log(e.message);
+            return res
+                .status(500)
+                .json({ success: false, message: "Erro ao carregar aulas em destaque" });
+        }
     }
 
 

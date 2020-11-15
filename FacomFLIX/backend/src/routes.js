@@ -37,6 +37,7 @@ routes.get("/usuario/dados-usuario/:login", autenticarUsuario, UsuarioController
 routes.get("/usuario/:id", autenticarUsuario, UsuarioController.buscarUsuarioPorId); // buscar dados de usuario por login
 routes.put('/usuario', autenticarUsuario, UsuarioController.editarUsuario);
 
+routes.get('/aula/destaque', autenticarUsuario, AulaController.buscarAulasDestaque);
 routes.get("/aula", autenticarUsuario, AulaController.mostrarAulas);
 routes.post("/aula", autenticarUsuario, AulaController.cadastrarAula);
 routes.delete("/aula/:id", autenticarUsuario, AulaController.apagarAula);
@@ -48,6 +49,7 @@ routes.post("/aula/incrementarVisualizacoes/:id", autenticarUsuario, AulaControl
 routes.get("/aula/comentarios/:aulaId", autenticarUsuario, ComentarioController.buscarPorAula);
 routes.get("/aula/:usuarioUpload", autenticarUsuario, AulaController.buscarAulasPorUsuario);
 routes.get('/aula/quantidadeAula/destaque', autenticarUsuario, AulaController.buscarQuantidadeVisualizacaoAulas);
+
 
 routes.post("/comentario/", autenticarUsuario, ComentarioController.cadastrarComentario);
 routes.put("/comentario/", autenticarUsuario, ComentarioController.editarComentario);
