@@ -1,5 +1,6 @@
 const { models, model } = require('../../configBD');
-const { Op } = require("sequelize");
+const { Op, QueryTypes } = require("sequelize");
+const sequelize = require('../../configBD');
 
 module.exports = {
 
@@ -47,6 +48,11 @@ module.exports = {
         try {
             const etiqueta = req.params.id;
             if(etiqueta){
+
+            const aula = await sequelize.query('DELETE FROM aula_etiqueta WHERE id_etiqueta = ' + etiqueta   , {
+                type: QueryTypes.SELECT
+            })
+
                 await models.Etiqueta.destroy({
                     where: { id: req.params.id }
                 });

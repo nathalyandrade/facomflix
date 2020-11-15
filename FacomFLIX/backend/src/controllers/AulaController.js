@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { models, model } = require('../../configBD');
-const { Op } = require("sequelize");
+const { Op, QueryTypes  } = require("sequelize");
 const sequelize = require('../../configBD');
 const { response } = require('express');
 
@@ -40,15 +40,28 @@ module.exports = {
     async cadastrarAula (req, res){
         try {
             let aula = req.body;
+            let listaEtiquetas =  req.body.listaEtiquetas;
             
             if (aula != null) {
                 aula.quantidadeDeVisualizacoes = 0;
                 
                 aula = await models.Aula.create(aula);
+
+                // const teste = forzao;
+                for(etiqueta of listaEtiquetas) {
+                    let etiquetaSave = {
+                        idAula: aula.id,
+                        idEtiqueta: etiqueta 
+                    }
+                    await models.AulaEtiqueta.create(etiquetaSave);
+                }  
+                    
                 return res
                     .status(201)
                     .json({ success: true, message: "Aula cadastrada!", aula: aula }).end();
             }
+
+            
             throw new Error("Erro");
 
         } catch (error) {
@@ -78,7 +91,7 @@ module.exports = {
     async editarAula (req, res){
         try {
             let aula = req.body;
-            
+            console.log('AULA PARA EDICAOOOOOOOOOOOOOOOO', aula);
             if (aula && aula.id) {
                 
                 aula = await models.Aula.update(aula, {where: {id: aula.id}});
@@ -267,20 +280,16 @@ module.exports = {
 
     async buscarQuantidadeVisualizacaoAulas(req, res){
         try {
-            const aula = await models.Aula.findOne({
-                group: ['usuarioUpload'],
-                attributes: ['usuarioUpload', [sequelize.fn('COUNT','quantidadeDeVisualizacoes'), 'quantidadeDeVisualizacoes']],
-                order:[
-                    [sequelize.col('quantidadeDeVisualizacoes'), 'DESC']
-                ]
+            const aula = await sequelize.query('SELECT fk_usuario_upload as usuarioUpload, sum(quantidade_de_visualizacoes) ' +
+            'from aula group by fk_usuario_upload  order by sum(quantidade_de_visualizacoes) desc limit 1' , {
+                type: QueryTypes.SELECT
             })
-            
-            const usuarioUpload = await models.Usuario.findByPk(aula.usuarioUpload);
-            
+
+            const usuarioUpload = await models.Usuario.findByPk(aula[0].usuarioupload);
             let usuarioDestaque = {
                 nome: usuarioUpload.nome,
                 email: usuarioUpload.email,
-                quantidadeDeVisualizacoes: aula.quantidadeDeVisualizacoes
+                quantidadeDeVisualizacoes: aula[0].sum
             } 
             if (usuarioDestaque) {
                 return res
