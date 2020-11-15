@@ -34,6 +34,7 @@ routes.get("/usuario", UsuarioController.mostrarTipoUsuario); // mostrar tipo us
 routes.post("/usuario", UsuarioController.cadastrarUsuario); // cadastrar usuario
 routes.post("/usuario/login", UsuarioController.loginUsuario); // login usuario
 routes.get("/usuario/dados-usuario/:login", autenticarUsuario, UsuarioController.buscarUsuarioPorLogin); // buscar dados de usuario por login
+routes.get("/usuario/:id", autenticarUsuario, UsuarioController.buscarUsuarioPorId); // buscar dados de usuario por login
 routes.put('/usuario', autenticarUsuario, UsuarioController.editarUsuario);
 
 routes.get("/aula", autenticarUsuario, AulaController.mostrarAulas);

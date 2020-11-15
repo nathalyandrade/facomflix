@@ -102,6 +102,24 @@ module.exports = {
         }
     },
 
+    async buscarUsuarioPorId(req, res) {
+        try {
+            let usuario = await models.Usuario.findOne({ where: { id: req.params.id } });
+            if(usuario) {
+                usuario.senha = "";
+                return res
+                    .status(200)
+                    .json(usuario);
+            }
+            
+        } catch (error) {
+            console.log(error.message);
+            return res
+                .status(500)
+                .json({ success: false, message: "Erro ao encontrar usuario" });
+        }
+    },
+
     async editarUsuario(req, res) {
         try {
             let usuarioParaEdicao = req.body;
