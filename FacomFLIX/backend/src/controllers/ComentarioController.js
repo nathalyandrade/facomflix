@@ -5,6 +5,7 @@ const sequelize = require('../../configBD');
 
 module.exports = {
     async buscarPorAula (req, res) {
+        console.log(models);
         try {
             const Comentario = await models.Comentario.findAll({
                 where: { aula: req.params.aulaId },
@@ -52,7 +53,7 @@ module.exports = {
         }
     },
 
-    async apagarComentário (req, res){
+    async apagarComentario (req, res){
         try {
             await models.Comentario.destroy({
                 where: { id: req.params.id }
@@ -60,7 +61,7 @@ module.exports = {
 
             return res
                 .status(200)
-                .json({ sucess: true, message: "Comentário removido"}).end();
+                .json({ success: true, message: "Comentário removido"}).end();
         } catch (error) {
             return res
                 .status(500)

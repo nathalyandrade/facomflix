@@ -45,7 +45,6 @@ const bcrypt = require("bcrypt");
             type: DataTypes.INTEGER,
             allowNull: false,
         }
-
     }, 
     {
         tableName: 'usuario', // forcar o nome da tabela no banco

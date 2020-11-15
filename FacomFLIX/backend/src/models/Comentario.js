@@ -29,4 +29,5 @@ module.exports = (sequelize) => {
     });
 
     sequelize.models.Comentario.hasOne(sequelize.models.Aula, {foreignKey: 'id', sourceKey: 'aula', as:'detalhesAula'});
+    sequelize.models.Comentario.hasOne(sequelize.models.Usuario, {foreignKey: 'id', sourceKey: 'usuario', as:'detalhesUsuario'});
 };

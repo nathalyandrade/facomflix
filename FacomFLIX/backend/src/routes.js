@@ -48,7 +48,9 @@ routes.get("/aula/comentarios/:aulaId", autenticarUsuario, ComentarioController.
 routes.get("/aula/:usuarioUpload", autenticarUsuario, AulaController.buscarAulasPorUsuario);
 routes.get('/aula/quantidadeAula/destaque', autenticarUsuario, AulaController.buscarQuantidadeVisualizacaoAulas);
 
-routes.post("/comentario/novo", autenticarUsuario, ComentarioController.cadastrarComentario);
+routes.post("/comentario/", autenticarUsuario, ComentarioController.cadastrarComentario);
+routes.put("/comentario/", autenticarUsuario, ComentarioController.editarComentario);
+routes.delete("/comentario/:id", autenticarUsuario, ComentarioController.apagarComentario);
 
 
 

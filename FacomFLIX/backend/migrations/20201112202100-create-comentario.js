@@ -15,7 +15,7 @@ module.exports = {
       },
       usuario: {
         type: Sequelize.INTEGER,
-        field: 'fk_usuario',
+        field: 'fk_usuario_assistente',
         allowNull: false,
         references:{
           model:{
