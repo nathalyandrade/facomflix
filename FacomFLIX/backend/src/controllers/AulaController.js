@@ -91,10 +91,30 @@ module.exports = {
     async editarAula (req, res){
         try {
             let aula = req.body;
-            console.log('AULA PARA EDICAOOOOOOOOOOOOOOOO', aula);
+            let listaEtiquetas =  req.body.listaEtiquetas;
+
             if (aula && aula.id) {
                 
-                aula = await models.Aula.update(aula, {where: {id: aula.id}});
+                const contador = await sequelize.query('SELECT COUNT(*) FROM aula_etiqueta where id_aula = ' + aula.id, {
+                    type: QueryTypes.SELECT
+                });
+                
+                if (contador[0].count > 1) {
+                    await sequelize.query('DELETE FROM aula_etiqueta where id_aula = ' + aula.id, {
+                        type: QueryTypes.DELETE
+                    });
+                }
+                
+                await models.Aula.update(aula, {where: {id: aula.id}});
+
+                for(etiqueta of listaEtiquetas) {
+                    let etiquetaSave = {
+                        idAula: aula.id,
+                        idEtiqueta: etiqueta 
+                    }
+                    await models.AulaEtiqueta.create(etiquetaSave);
+                }
+
                 return res
                     .status(201)
                     .json({ success: true, message: "Aula atualizada!"}).end();

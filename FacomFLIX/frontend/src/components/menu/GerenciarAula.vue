@@ -213,6 +213,9 @@ export default {
     },
     limparAulaSelecionada() {
       this.aulaSelecionada = new Object();
+      this.listaEtiquetasSelecionadas = [];
+      this.categoria = new Object();
+      this.serie = new Object();
     },
     salvar() {
       console.log(this.serie);
@@ -244,6 +247,7 @@ export default {
             link: this.aulaSelecionada.link,
             serie: this.serie.id,
             categoria: this.categoria.id,
+            listaEtiquetas: this.listaEtiquetasSelecionadas,
           })
           .then((response) => {
             this.buscarAulas();
